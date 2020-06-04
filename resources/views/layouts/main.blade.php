@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>Tags</title>
+    <title>{{ config('app.name', 'Laravel Shops') }}</title>
 	
     <link rel='stylesheet' href='{{ asset('assets/css/style.css') }}' type='text/css' />
     <link rel='stylesheet' href='{{ asset('assets/css/jquery.mmenu.css') }}' type='text/css' />
@@ -17,11 +17,13 @@
 
 <body class="archive post-type-archive post-type-archive-gd_place geodir_custom_posts geodir-page geodir-archive geodir_advance_search gd-map-auto">
     <div id="ds-container">
+        @include('partials.header')
 
-        @includeWhen(request()->is('/'), 'partials.map') 
+        @includeWhen(request()->is('/'), 'partials.map')
 
         @yield('content')
 
+        @include('partials.footer')
     </div>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     @yield('scripts')
