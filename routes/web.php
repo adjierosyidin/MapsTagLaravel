@@ -22,7 +22,7 @@ Route::get('/home', function () {
 });
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('shop/{shop}', 'HomeController@show')->name('shop');
+Route::get('tag/{tag}', 'HomeController@show')->name('tag');
 
 Auth::routes();
 
@@ -39,10 +39,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
-
-    // Categories
-    Route::delete('categories/destroy', 'CategoriesController@massDestroy')->name('categories.massDestroy');
-    Route::resource('categories', 'CategoriesController');
 
     // Shops
     Route::delete('shops/destroy', 'ShopsController@massDestroy')->name('shops.massDestroy');
