@@ -2,7 +2,7 @@
     <div class="container">
         <div class="site-logo-wrap">
             <hgroup>
-                <h1 class='site-title site-title-no-desc'> <a  style="color:#FFFFFF;" href='{{ route('home') }}' title='{{ config('app.name', 'Laravel Shops') }}' rel='home'>{{ config('app.name', 'Laravel Shops') }}</a></h1>
+                <h1 class='site-title site-title-no-desc'> <a  style="color:#FFFFFF;" href='{{ route('home') }}' title='{{ config('app.name', 'Laravel Tags') }}' rel='home'>{{ config('app.name', 'Laravel Tags') }}</a></h1>
             </hgroup>
         </div>
         <nav id="primary-nav" class="primary-nav" role="navigation">

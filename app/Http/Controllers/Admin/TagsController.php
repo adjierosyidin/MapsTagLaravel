@@ -55,11 +55,40 @@ class TagsController extends Controller
         return view('admin.tags.edit', compact('tag'));
     }
 
+    public function update(UpdateTagRequest $request, Tag $tag)
+    {
+        if(!$request->active){
+            $request->merge([
+                'active' => 0
+            ]);
+        }
+        $tag->update($request->all());
+
+        /* if (count($tag->photos) > 0) {
+            foreach ($tag->photos as $media) {
+                if (!in_array($media->file_name, $request->input('photos', []))) {
+                    $media->delete();
+                }
+            }
+        } */
+
+        /* $media = $tag->photos->pluck('file_name')->toArray(); */
+
+        foreach ($request->input('photos', []) as $file) {
+            if (count($media) === 0 || !in_array($file, $media)) {
+                $tag->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('photos');
+            }
+        }
+
+        return redirect()->route('admin.tags.index');
+    }
+
     public function show(Tag $tag)
     {
         abort_if(Gate::denies('tag_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $tags = Tag::all();
+        $tag->load('created_by');
 
         return view('admin.tags.show', compact('tag'));
     }
@@ -107,4 +136,11 @@ class TagsController extends Controller
 
         return redirect()->route('admin.tags.index');
     }
+    public function massDestroy(MassDestroyTagRequest $request)
+    {
+        Tag::whereIn('id', request('ids'))->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
+    }
+
 }
