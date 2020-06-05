@@ -2,9 +2,18 @@
 
 namespace App;
 
+use App\Traits\MultiTenantModelTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tag extends Model
 {
-    protected $fillable = ['name','address','latitude','longitude','description','img','active'];
+    public $table = 'tags';
+
+    protected $fillable = ['name','address','latitude','longitude','description','img','active','created_by_id',];
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, 'created_by_id');
+    }
 }

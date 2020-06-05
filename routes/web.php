@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home', function () {
     if (session('status')) {
-        return redirect()->route('admin.shops.index')->with('status', session('status'));
+        return redirect()->route('admin.tags.index')->with('status', session('status'));
     }
 
-    return redirect()->route('admin.shops.index');
+    return redirect()->route('admin.tags.index');
 });
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -40,8 +40,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
 
-    // Shops
-    Route::delete('shops/destroy', 'ShopsController@massDestroy')->name('shops.massDestroy');
-    Route::post('shops/media', 'ShopsController@storeMedia')->name('shops.storeMedia');
-    Route::resource('shops', 'ShopsController');
+    // Tags
+    Route::delete('tags/destroy', 'TagsController@massDestroy')->name('tags.massDestroy');
+    Route::post('tags/media', 'TagsController@storeMedia')->name('tags.storeMedia');
+    Route::resource('tags', 'TagsController');
 });
