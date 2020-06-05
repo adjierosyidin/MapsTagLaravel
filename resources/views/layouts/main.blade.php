@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>{{ config('app.name', 'Laravel Shops') }}</title>
+    <title>{{ config('app.name', 'Laravel Tags') }}</title>
 	
     <link rel='stylesheet' href='{{ asset('assets/css/style.css') }}' type='text/css' />
     <link rel='stylesheet' href='{{ asset('assets/css/jquery.mmenu.css') }}' type='text/css' />

@@ -44,7 +44,7 @@
                     </ul>
                 </li>
             @endcan
-            @can('category_access')
+            {{-- @can('category_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.categories.index") }}" class="nav-link {{ request()->is('admin/categories') || request()->is('admin/categories/*') ? 'active' : '' }}">
                         <i class="fa-fw fas fa-tags nav-icon">
@@ -53,14 +53,14 @@
                         {{ trans('cruds.category.title') }}
                     </a>
                 </li>
-            @endcan
-            @can('shop_access')
+            @endcan --}}
+            @can('tag_access')
                 <li class="nav-item">
-                    <a href="{{ route("admin.shops.index") }}" class="nav-link {{ request()->is('admin/shops') || request()->is('admin/shops/*') ? 'active' : '' }}">
-                        <i class="fa-fw fas fa-shopping-basket nav-icon">
+                    <a href="{{ route("admin.tags.index") }}" class="nav-link {{ request()->is('admin/tags') || request()->is('admin/tags/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-tags nav-icon">
 
                         </i>
-                        {{ trans('cruds.shop.title') }}
+                        {{ trans('cruds.tag.title') }}
                     </a>
                 </li>
             @endcan

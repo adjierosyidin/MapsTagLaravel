@@ -23,6 +23,7 @@ class CreateTags extends Migration
             $table->string('img')->nullable();
             $table->boolean('active')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

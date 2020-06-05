@@ -16,11 +16,18 @@ class UsersTableSeeder extends Seeder
                 'password'       => '$2y$10$vUIzDlvfpu2yOATsPYcPaOTY/zgbgwViLIWSfZxSlmRBFV.g/fmOW',
                 'remember_token' => null,
             ],
+            [
+                'id'             => 2,
+                'name'           => 'Adjie Rosyidin',
+                'email'          => 'adjie@user.com',
+                'password'       => '$2y$10$vUIzDlvfpu2yOATsPYcPaOTY/zgbgwViLIWSfZxSlmRBFV.g/fmOW',
+                'remember_token' => null,
+            ],
         ];
 
         User::insert($users);
 
-        foreach(range(1,10) as $id)
+        foreach(range(1,2) as $id)
         {
             User::create([
                 'name' => $faker->unique()->name,
