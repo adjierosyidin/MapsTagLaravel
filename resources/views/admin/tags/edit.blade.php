@@ -21,24 +21,6 @@
                     <span class="help-block">{{ trans('cruds.tag.fields.name_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="categories">{{ trans('cruds.tag.fields.categories') }}</label>
-                    <div style="padding-bottom: 4px">
-                        <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                        <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                    </div>
-                    <select class="form-control select2 {{ $errors->has('categories') ? 'is-invalid' : '' }}" name="categories[]" id="categories" multiple>
-                        @foreach($categories as $id => $categories)
-                            <option value="{{ $id }}" {{ (in_array($id, old('categories', [])) || $tag->categories->contains($id)) ? 'selected' : '' }}>{{ $categories }}</option>
-                        @endforeach
-                    </select>
-                    @if($errors->has('categories'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('categories') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.tag.fields.categories_helper') }}</span>
-                </div>
-                <div class="form-group">
                     <label for="description">{{ trans('cruds.tag.fields.description') }}</label>
                     <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{{ old('description', $tag->description) }}</textarea>
                     @if($errors->has('description'))
@@ -52,11 +34,11 @@
                     <label for="photos">{{ trans('cruds.tag.fields.photos') }}</label>
                     <div class="needsclick dropzone {{ $errors->has('photos') ? 'is-invalid' : '' }}" id="photos-dropzone">
                     </div>
-                    @if($errors->has('photos'))
+                    {{-- @if($errors->has('photos'))
                         <div class="invalid-feedback">
                             {{ $errors->first('photos') }}
                         </div>
-                    @endif
+                    @endif --}}
                     <span class="help-block">{{ trans('cruds.tag.fields.photos_helper') }}</span>
                 </div>
                 <div class="form-group">
@@ -86,43 +68,7 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.tag.fields.active_helper') }}</span>
                 </div>
-                <label>{{ trans('cruds.tag.fields.working_hours') }}</label>
-                @foreach($days as $day)
-                    <div class="form-inline">
-                        <label class="my-1 mr-2">{{ ucfirst($day->name) }}: from</label>
-                        <select class="custom-select my-1 mr-sm-2" name="from_hours[{{ $day->id }}]">
-                            <option value="">--</option>
-                            @foreach(range(0,23) as $hours)
-                                <option 
-                                    value="{{ $hours < 10 ? "0$hours" : $hours }}"
-                                    {{ old('from_hours.'.$day->id, $tag->days->find($day->id) ? $tag->days->find($day->id)->pivot['from_hours'] : null) == ($hours < 10 ? "0$hours" : $hours) ? 'selected' : '' }}
-                                >{{ $hours < 10 ? "0$hours" : $hours }}</option>
-                            @endforeach
-                        </select>
-                        <label class="my-1 mr-2">:</label>
-                        <select class="custom-select my-1 mr-sm-2" name="from_minutes[{{ $day->id }}]">
-                            <option value="">--</option>
-                            <option value="00" {{ old('from_minutes.'.$day->id, $tag->days->find($day->id) ? $tag->days->find($day->id)->pivot['from_minutes'] : null) == '00' ? 'selected' : '' }}>00</option>
-                            <option value="30" {{ old('from_minutes.'.$day->id, $tag->days->find($day->id) ? $tag->days->find($day->id)->pivot['from_minutes'] : null) == '30' ? 'selected' : '' }}>30</option>
-                        </select>
-                        <label class="my-1 mr-2">to</label>
-                        <select class="custom-select my-1 mr-sm-2" name="to_hours[{{ $day->id }}]">
-                            <option value="">--</option>
-                            @foreach(range(0,23) as $hours)
-                                <option 
-                                    value="{{ $hours < 10 ? "0$hours" : $hours }}"
-                                    {{ old('to_hours.'.$day->id, $tag->days->find($day->id) ? $tag->days->find($day->id)->pivot['to_hours'] : null) == ($hours < 10 ? "0$hours" : $hours) ? 'selected' : '' }}
-                                >{{ $hours < 10 ? "0$hours" : $hours }}</option>
-                            @endforeach
-                        </select>
-                        <label class="my-1 mr-2">:</label>
-                        <select class="custom-select my-1 mr-sm-2" name="to_minutes[{{ $day->id }}]">
-                            <option value="">--</option>
-                            <option value="00" {{ old('to_minutes.'.$day->id, $tag->days->find($day->id) ? $tag->days->find($day->id)->pivot['to_minutes'] : null) == '00' ? 'selected' : '' }}>00</option>
-                            <option value="30" {{ old('to_minutes.'.$day->id, $tag->days->find($day->id) ? $tag->days->find($day->id)->pivot['to_minutes'] : null) == '30' ? 'selected' : '' }}>30</option>
-                        </select>
-                    </div>
-                @endforeach
+                
 
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">

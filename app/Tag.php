@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tag extends Model
 {
+    use SoftDeletes, MultiTenantModelTrait;
+
     public $table = 'tags';
 
     protected $fillable = ['name','address','latitude','longitude','description','img','active','created_by_id',];
