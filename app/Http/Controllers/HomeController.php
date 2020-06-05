@@ -27,8 +27,8 @@ class HomeController extends Controller
         $tags = Tag::all();
         return view('home', compact('tags'));
     }
-    public function show()
+    public function show(Tag $tag)
     {
-        return view('tag');
+        return view('tag', compact('tag'));
     }
 }

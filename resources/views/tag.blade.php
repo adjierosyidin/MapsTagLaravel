@@ -47,7 +47,7 @@
                                                     <div id="geodir_images_5de6cafacbba5_180" class="geodir-image-wrapper" data-controlnav="1" data-slideshow="1">
                                                         <ul class="geodir-gallery geodir-images clearfix">
                                                                 <li>
-                                                                    <a href="{{ $tag->img }}" class="geodir-lightbox-image" target="_blank"><img src="../{{ $tag->img }}" width="1440" height="960"><i class="fas fa-search-plus" aria-hidden="true"></i></a>
+                                                                    <a href="../../{{ $tag->img }}" class="geodir-lightbox-image" target="_blank"><img src="../../{{ $tag->img }}" width="1440" height="960"><i class="fas fa-search-plus" aria-hidden="true"></i></a>
                                                                 </li>
                                                         </ul>
                                                     </div>

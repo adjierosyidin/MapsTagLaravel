@@ -55,7 +55,7 @@ class TagsController extends Controller
         return view('admin.tags.edit', compact('tag'));
     }
 
-    public function update(UpdateTagRequest $request, Tag $tag)
+    /* public function update(UpdateTagRequest $request, Tag $tag)
     {
         if(!$request->active){
             $request->merge([
@@ -64,15 +64,15 @@ class TagsController extends Controller
         }
         $tag->update($request->all());
 
-        /* if (count($tag->photos) > 0) {
+        if (count($tag->photos) > 0) {
             foreach ($tag->photos as $media) {
                 if (!in_array($media->file_name, $request->input('photos', []))) {
                     $media->delete();
                 }
             }
-        } */
+        }
 
-        /* $media = $tag->photos->pluck('file_name')->toArray(); */
+        $media = $tag->photos->pluck('file_name')->toArray(); 
 
         foreach ($request->input('photos', []) as $file) {
             if (count($media) === 0 || !in_array($file, $media)) {
@@ -81,7 +81,7 @@ class TagsController extends Controller
         }
 
         return redirect()->route('admin.tags.index');
-    }
+    } */
 
     public function show(Tag $tag)
     {
