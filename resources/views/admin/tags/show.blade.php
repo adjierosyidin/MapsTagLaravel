@@ -49,6 +49,7 @@
                                     <img src="{{ $media->getUrl('thumb') }}" width="50px" height="50px">
                                 </a>
                             @endforeach --}}
+                            {{ $tag->img }}
                         </td>
                     </tr>
                     <tr>

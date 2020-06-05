@@ -28,9 +28,9 @@
                             <th>
                                 {{ trans('cruds.tag.fields.name') }}
                             </th>
-                            {{-- <th>
+                            <th>
                                 {{ trans('cruds.tag.fields.photos') }}
-                            </th> --}}
+                            </th>
                             <th>
                                 {{ trans('cruds.tag.fields.address') }}
                             </th>
@@ -54,13 +54,14 @@
                                 <td>
                                     {{ $tag->name ?? '' }}
                                 </td>
-                                {{-- <td>
-                                    @foreach($tag->photos as $key => $media)
+                                <td>
+                                    {{-- @foreach($tag->photos as $key => $media)
                                         <a href="{{ $media->getUrl() }}" target="_blank">
                                             <img src="{{ $media->getUrl('thumb') }}" width="50px" height="50px">
                                         </a>
-                                    @endforeach
-                                </td> --}}
+                                    @endforeach --}}
+                                    {{ $tag->img ?? '' }}
+                                </td>
                                 <td>
                                     {{ $tag->address ?? '' }}
                                 </td>
