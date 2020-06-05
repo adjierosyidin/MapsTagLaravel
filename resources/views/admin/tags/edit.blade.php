@@ -21,24 +21,6 @@
                     <span class="help-block">{{ trans('cruds.tag.fields.name_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="categories">{{ trans('cruds.tag.fields.categories') }}</label>
-                    <div style="padding-bottom: 4px">
-                        <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                        <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                    </div>
-                    <select class="form-control select2 {{ $errors->has('categories') ? 'is-invalid' : '' }}" name="categories[]" id="categories" multiple>
-                        @foreach($categories as $id => $categories)
-                            <option value="{{ $id }}" {{ (in_array($id, old('categories', [])) || $tag->categories->contains($id)) ? 'selected' : '' }}>{{ $categories }}</option>
-                        @endforeach
-                    </select>
-                    @if($errors->has('categories'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('categories') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.tag.fields.categories_helper') }}</span>
-                </div>
-                <div class="form-group">
                     <label for="description">{{ trans('cruds.tag.fields.description') }}</label>
                     <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{{ old('description', $tag->description) }}</textarea>
                     @if($errors->has('description'))
@@ -49,15 +31,15 @@
                     <span class="help-block">{{ trans('cruds.tag.fields.description_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="photos">{{ trans('cruds.tag.fields.photos') }}</label>
-                    <div class="needsclick dropzone {{ $errors->has('photos') ? 'is-invalid' : '' }}" id="photos-dropzone">
+                    <label for="img">{{ trans('cruds.tag.fields.img') }}</label>
+                    <div class="needsclick dropzone {{ $errors->has('img') ? 'is-invalid' : '' }}" id="img-dropzone">
                     </div>
-                    @if($errors->has('photos'))
+                    @if($errors->has('img'))
                         <div class="invalid-feedback">
-                            {{ $errors->first('photos') }}
+                            {{ $errors->first('img') }}
                         </div>
                     @endif
-                    <span class="help-block">{{ trans('cruds.tag.fields.photos_helper') }}</span>
+                    <span class="help-block">{{ trans('cruds.tag.fields.img_helper') }}</span>
                 </div>
                 <div class="form-group">
                     <label for="address">{{ trans('cruds.tag.fields.address') }}</label>
@@ -86,44 +68,7 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.tag.fields.active_helper') }}</span>
                 </div>
-                <label>{{ trans('cruds.tag.fields.working_hours') }}</label>
-                @foreach($days as $day)
-                    <div class="form-inline">
-                        <label class="my-1 mr-2">{{ ucfirst($day->name) }}: from</label>
-                        <select class="custom-select my-1 mr-sm-2" name="from_hours[{{ $day->id }}]">
-                            <option value="">--</option>
-                            @foreach(range(0,23) as $hours)
-                                <option 
-                                    value="{{ $hours < 10 ? "0$hours" : $hours }}"
-                                    {{ old('from_hours.'.$day->id, $tag->days->find($day->id) ? $tag->days->find($day->id)->pivot['from_hours'] : null) == ($hours < 10 ? "0$hours" : $hours) ? 'selected' : '' }}
-                                >{{ $hours < 10 ? "0$hours" : $hours }}</option>
-                            @endforeach
-                        </select>
-                        <label class="my-1 mr-2">:</label>
-                        <select class="custom-select my-1 mr-sm-2" name="from_minutes[{{ $day->id }}]">
-                            <option value="">--</option>
-                            <option value="00" {{ old('from_minutes.'.$day->id, $tag->days->find($day->id) ? $tag->days->find($day->id)->pivot['from_minutes'] : null) == '00' ? 'selected' : '' }}>00</option>
-                            <option value="30" {{ old('from_minutes.'.$day->id, $tag->days->find($day->id) ? $tag->days->find($day->id)->pivot['from_minutes'] : null) == '30' ? 'selected' : '' }}>30</option>
-                        </select>
-                        <label class="my-1 mr-2">to</label>
-                        <select class="custom-select my-1 mr-sm-2" name="to_hours[{{ $day->id }}]">
-                            <option value="">--</option>
-                            @foreach(range(0,23) as $hours)
-                                <option 
-                                    value="{{ $hours < 10 ? "0$hours" : $hours }}"
-                                    {{ old('to_hours.'.$day->id, $tag->days->find($day->id) ? $tag->days->find($day->id)->pivot['to_hours'] : null) == ($hours < 10 ? "0$hours" : $hours) ? 'selected' : '' }}
-                                >{{ $hours < 10 ? "0$hours" : $hours }}</option>
-                            @endforeach
-                        </select>
-                        <label class="my-1 mr-2">:</label>
-                        <select class="custom-select my-1 mr-sm-2" name="to_minutes[{{ $day->id }}]">
-                            <option value="">--</option>
-                            <option value="00" {{ old('to_minutes.'.$day->id, $tag->days->find($day->id) ? $tag->days->find($day->id)->pivot['to_minutes'] : null) == '00' ? 'selected' : '' }}>00</option>
-                            <option value="30" {{ old('to_minutes.'.$day->id, $tag->days->find($day->id) ? $tag->days->find($day->id)->pivot['to_minutes'] : null) == '30' ? 'selected' : '' }}>30</option>
-                        </select>
-                    </div>
-                @endforeach
-
+                
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">
                         {{ trans('global.save') }}
@@ -140,8 +85,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize&language=en&region=GB" async defer></script>
     <script src="/js/mapInput.js"></script>
     <script>
-        var uploadedPhotosMap = {}
-    Dropzone.options.photosDropzone = {
+        var uploadedimgMap = {}
+    Dropzone.options.imgDropzone = {
         url: '{{ route('admin.tags.storeMedia') }}',
         maxFilesize: 2, // MB
         acceptedFiles: '.jpeg,.jpg,.png,.gif',
@@ -155,8 +100,8 @@
         height: 4096
         },
         success: function (file, response) {
-        $('form').append('<input type="hidden" name="photos[]" value="' + response.name + '">')
-        uploadedPhotosMap[file.name] = response.name
+        $('form').append('<input type="hidden" name="img[]" value="' + response.name + '">')
+        uploadedimgMap[file.name] = response.name
         },
         removedfile: function (file) {
         console.log(file)
@@ -165,20 +110,20 @@
         if (typeof file.file_name !== 'undefined') {
             name = file.file_name
         } else {
-            name = uploadedPhotosMap[file.name]
+            name = uploadedimgMap[file.name]
         }
-        $('form').find('input[name="photos[]"][value="' + name + '"]').remove()
+        $('form').find('input[name="img[]"][value="' + name + '"]').remove()
         },
         init: function () {
-    @if(isset($tag) && $tag->photos)
+    @if(isset($tag) && $tag->img)
         var files =
-            {!! json_encode($tag->photos) !!}
+            {!! json_encode($tag->img) !!}
             for (var i in files) {
             var file = files[i]
             this.options.addedfile.call(this, file)
             this.options.thumbnail.call(this, file, file.url)
             file.previewElement.classList.add('dz-complete')
-            $('form').append('<input type="hidden" name="photos[]" value="' + file.file_name + '">')
+            $('form').append('<input type="hidden" name="img[]" value="' + file.file_name + '">')
             }
     @endif
         },

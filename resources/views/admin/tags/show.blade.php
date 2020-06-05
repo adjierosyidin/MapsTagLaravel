@@ -33,16 +33,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.tag.fields.categories') }}
-                        </th>
-                        <td>
-                            @foreach($tag->categories as $key => $categories)
-                                <span class="label label-info">{{ $categories->name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.tag.fields.description') }}
                         </th>
                         <td>
@@ -51,14 +41,12 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.tag.fields.photos') }}
+                            {{ trans('cruds.tag.fields.img') }}
                         </th>
                         <td>
-                            @foreach($tag->photos as $key => $media)
-                                <a href="{{ $media->getUrl() }}" target="_blank">
-                                    <img src="{{ $media->getUrl('thumb') }}" width="50px" height="50px">
-                                </a>
-                            @endforeach
+                            <a href="../../../{{ $tag->img }}" target="_blank">
+                                <img src="../../../{{ $tag->img }}" width="50px" height="50px">
+                            </a>
                         </td>
                     </tr>
                     <tr>
@@ -75,21 +63,6 @@
                         </th>
                         <td>
                             <input type="checkbox" disabled="disabled" {{ $tag->active ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.tag.fields.working_hours') }}
-                        </th>
-                        <td>
-                            @if($tag->days)
-                                @foreach($tag->days as $day)
-                                    <strong>{{ ucfirst($day->name) }}</strong>:
-                                    from <strong>{{ $day->pivot->from_hours }}:{{ $day->pivot->from_minutes }}</strong>
-                                    to <strong>{{ $day->pivot->to_hours }}:{{ $day->pivot->to_minutes }}</strong>
-                                    <br>
-                                @endforeach
-                            @endif
                         </td>
                     </tr>
                 </tbody>

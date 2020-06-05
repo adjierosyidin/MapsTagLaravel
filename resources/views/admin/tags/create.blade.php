@@ -30,15 +30,15 @@
                     <span class="help-block">{{ trans('cruds.tag.fields.description_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="photos">{{ trans('cruds.tag.fields.photos') }}</label>
-                    <div class="needsclick dropzone {{ $errors->has('photos') ? 'is-invalid' : '' }}" id="photos-dropzone">
+                    <label for="img">{{ trans('cruds.tag.fields.img') }}</label>
+                    <div class="needsclick dropzone {{ $errors->has('img') ? 'is-invalid' : '' }}" id="img-dropzone">
                     </div>
-                    @if($errors->has('photos'))
+                    @if($errors->has('img'))
                         <div class="invalid-feedback">
-                            {{ $errors->first('photos') }}
+                            {{ $errors->first('img') }}
                         </div>
                     @endif
-                    <span class="help-block">{{ trans('cruds.tag.fields.photos_helper') }}</span>
+                    <span class="help-block">{{ trans('cruds.tag.fields.img_helper') }}</span>
                 </div>
                 <div class="form-group">
                     <label for="address">{{ trans('cruds.tag.fields.address') }}</label>
@@ -84,8 +84,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize&language=en&region=GB" async defer></script>
     <script src="/js/mapInput.js"></script>
     <script>
-        var uploadedPhotosMap = {}
-    Dropzone.options.photosDropzone = {
+        var uploadedimgMap = {}
+    Dropzone.options.imgDropzone = {
         url: '{{ route('admin.tags.storeMedia') }}',
         maxFilesize: 2, // MB
         acceptedFiles: '.jpeg,.jpg,.png,.gif',
@@ -99,8 +99,8 @@
         height: 4096
         },
         success: function (file, response) {
-        $('form').append('<input type="hidden" name="photos[]" value="' + response.name + '">')
-        uploadedPhotosMap[file.name] = response.name
+        $('form').append('<input type="hidden" name="img[]" value="' + response.name + '">')
+        uploadedimgMap[file.name] = response.name
         },
         removedfile: function (file) {
         console.log(file)
@@ -109,20 +109,20 @@
         if (typeof file.file_name !== 'undefined') {
             name = file.file_name
         } else {
-            name = uploadedPhotosMap[file.name]
+            name = uploadedimgMap[file.name]
         }
-        $('form').find('input[name="photos[]"][value="' + name + '"]').remove()
+        $('form').find('input[name="img[]"][value="' + name + '"]').remove()
         },
         init: function () {
-    @if(isset($tag) && $tag->photos)
+    @if(isset($tag) && $tag->img)
         var files =
-            {!! json_encode($tag->photos) !!}
+            {!! json_encode($tag->img) !!}
             for (var i in files) {
             var file = files[i]
             this.options.addedfile.call(this, file)
             this.options.thumbnail.call(this, file, file.url)
             file.previewElement.classList.add('dz-complete')
-            $('form').append('<input type="hidden" name="photos[]" value="' + file.file_name + '">')
+            $('form').append('<input type="hidden" name="img[]" value="' + file.file_name + '">')
             }
     @endif
         },

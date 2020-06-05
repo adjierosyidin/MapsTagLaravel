@@ -13,7 +13,7 @@
                         @if($tag->img)
                             <div class="geodir-post-slider center-gallery">
                                 <div class="bxslider">
-                                    <div><img src="{{ $tag->img }}"></div>
+                                    <div><img src="../{{ $tag->img }}"></div>
                                 </div>
                             </div>
                         @endif
@@ -47,7 +47,7 @@
                                                     <div id="geodir_images_5de6cafacbba5_180" class="geodir-image-wrapper" data-controlnav="1" data-slideshow="1">
                                                         <ul class="geodir-gallery geodir-images clearfix">
                                                                 <li>
-                                                                    <a href="{{ $tag->img }}" class="geodir-lightbox-image" target="_blank"><img src="{{ $tag->img }}" width="1440" height="960"><i class="fas fa-search-plus" aria-hidden="true"></i></a>
+                                                                    <a href="{{ $tag->img }}" class="geodir-lightbox-image" target="_blank"><img src="../{{ $tag->img }}" width="1440" height="960"><i class="fas fa-search-plus" aria-hidden="true"></i></a>
                                                                 </li>
                                                         </ul>
                                                     </div>
@@ -167,7 +167,7 @@ $(function(){
                                                     <a href="{{ route('tag', $tag->id) }}" title="View: {{ $tag->name }}">{{ $tag->name }}</a>
                                                 </h4>
                                             </div>
-                                            <a href="{{ route('tag', $tag->id) }}"><img src="{{ $tag->img }}" alt="{{ $tag->name }}" class="align size-medium_large" width="1400" height="930"></a>
+                                            <a href="{{ route('tag', $tag->id) }}"><img src="../{{ $tag->img }}" alt="{{ $tag->name }}" class="align size-medium_large" width="1400" height="930"></a>
                                         </li>
                                     </ul>
                                 </div>
