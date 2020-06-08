@@ -31,7 +31,8 @@
                 </div>
                 <div class="form-group">
                     <label for="img">{{ trans('cruds.tag.fields.img') }}</label>
-                    <div class="needsclick dropzone {{ $errors->has('img') ? 'is-invalid' : '' }}" id="img-dropzone">
+                    <input type="file" name="img" id="img-dropzone" class="needsclick dorpzone form-control {{ $errors->has('img') ? 'is-invalid' : '' }}">
+                    <!-- <div class="needsclick dropzone {{ $errors->has('img') ? 'is-invalid' : '' }}" id="img-dropzone"> -->
                     </div>
                     @if($errors->has('img'))
                         <div class="invalid-feedback">
@@ -83,7 +84,7 @@
     @section('scripts')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize&language=en&region=GB" async defer></script>
     <script src="/js/mapInput.js"></script>
-    <script>
+    <!-- <script>
         var uploadedimgMap = {}
     Dropzone.options.imgDropzone = {
         url: '{{ route('admin.tags.storeMedia') }}',
@@ -99,7 +100,7 @@
         height: 4096
         },
         success: function (file, response) {
-        $('form').append('<input type="hidden" name="img[]" value="' + response.name + '">')
+        $('form').append('<input type="hidden" name="img" value="' + response.name + '">')
         uploadedimgMap[file.name] = response.name
         },
         removedfile: function (file) {
@@ -111,7 +112,7 @@
         } else {
             name = uploadedimgMap[file.name]
         }
-        $('form').find('input[name="img[]"][value="' + name + '"]').remove()
+        $('form').find('input[name="img"][value="' + name + '"]').remove()
         },
         init: function () {
     @if(isset($tag) && $tag->img)
@@ -122,7 +123,7 @@
             this.options.addedfile.call(this, file)
             this.options.thumbnail.call(this, file, file.url)
             file.previewElement.classList.add('dz-complete')
-            $('form').append('<input type="hidden" name="img[]" value="' + file.file_name + '">')
+            $('form').append('<input type="hidden" name="img" value="' + file.file_name + '">')
             }
     @endif
         },
@@ -143,5 +144,5 @@
             return _results
         }
     }
-    </script>
+    </script> -->
     @endsection
