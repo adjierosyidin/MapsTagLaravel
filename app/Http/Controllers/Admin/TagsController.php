@@ -38,8 +38,8 @@ class TagsController extends Controller
     {
         $tag = Tag::create($request->all());
 
-        foreach ($request->input('photos', []) as $file) {
-            $tag->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('photos');
+        foreach ($request->input('img', []) as $file) {
+            $tag->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('img');
         }
 
         return redirect()->route('admin.tags.index');
@@ -55,7 +55,7 @@ class TagsController extends Controller
         return view('admin.tags.edit', compact('tag'));
     }
 
-    /* public function update(UpdateTagRequest $request, Tag $tag)
+    public function update(UpdateTagRequest $request, Tag $tag)
     {
         if(!$request->active){
             $request->merge([
@@ -64,24 +64,24 @@ class TagsController extends Controller
         }
         $tag->update($request->all());
 
-        if (count($tag->photos) > 0) {
-            foreach ($tag->photos as $media) {
-                if (!in_array($media->file_name, $request->input('photos', []))) {
+        if (count($tag->img) > 0) {
+            foreach ($tag->img as $media) {
+                if (!in_array($media->file_name, $request->input('img', []))) {
                     $media->delete();
                 }
             }
         }
 
-        $media = $tag->photos->pluck('file_name')->toArray(); 
+        $media = $tag->img->pluck('file_name')->toArray(); 
 
-        foreach ($request->input('photos', []) as $file) {
+        foreach ($request->input('img', []) as $file) {
             if (count($media) === 0 || !in_array($file, $media)) {
-                $tag->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('photos');
+                $tag->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('img');
             }
         }
 
         return redirect()->route('admin.tags.index');
-    } */
+    }
 
     public function show(Tag $tag)
     {
@@ -102,7 +102,7 @@ class TagsController extends Controller
         return back();
     }
 
-    public function update(UpdateTagRequest $request, Tag $tag)
+    /* public function update(UpdateTagRequest $request, Tag $tag)
     {
         if($request['img']!="undefined"){
             
@@ -133,9 +133,9 @@ class TagsController extends Controller
             ]);
         }
         
-
         return redirect()->route('admin.tags.index');
-    }
+    } */
+
     public function massDestroy(MassDestroyTagRequest $request)
     {
         Tag::whereIn('id', request('ids'))->delete();

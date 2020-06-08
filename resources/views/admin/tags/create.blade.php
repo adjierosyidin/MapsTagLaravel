@@ -84,7 +84,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize&language=en&region=GB" async defer></script>
     <script src="/js/mapInput.js"></script>
     <script>
-        var uploadedimgMap = {}
+        var uploadedPhotosMap = {}
     Dropzone.options.imgDropzone = {
         url: '{{ route('admin.tags.storeMedia') }}',
         maxFilesize: 2, // MB
@@ -100,7 +100,7 @@
         },
         success: function (file, response) {
         $('form').append('<input type="hidden" name="img[]" value="' + response.name + '">')
-        uploadedimgMap[file.name] = response.name
+        uploadedPhotosMap[file.name] = response.name
         },
         removedfile: function (file) {
         console.log(file)
@@ -109,7 +109,7 @@
         if (typeof file.file_name !== 'undefined') {
             name = file.file_name
         } else {
-            name = uploadedimgMap[file.name]
+            name = uploadedPhotosMap[file.name]
         }
         $('form').find('input[name="img[]"][value="' + name + '"]').remove()
         },

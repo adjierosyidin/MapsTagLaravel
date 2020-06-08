@@ -11,7 +11,7 @@ class MassDestroyShopRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('shop_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('tag_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }

@@ -13,7 +13,10 @@
                         @if($tag->img)
                             <div class="geodir-post-slider center-gallery">
                                 <div class="bxslider">
-                                    <div><img src="../{{ $tag->img }}"></div>
+                                    {{-- <div><img src="../{{ $tag->img }}"></div> --}}
+                                    @foreach($tag->img as $im)
+                                    <div><img src="{{ $im->url }}"></div>
+                                    @endforeach
                                 </div>
                             </div>
                         @endif
@@ -46,9 +49,17 @@
                                                 <div class="geodir-image-container geodir-image-sizes-medium_large ">
                                                     <div id="geodir_images_5de6cafacbba5_180" class="geodir-image-wrapper" data-controlnav="1" data-slideshow="1">
                                                         <ul class="geodir-gallery geodir-images clearfix">
-                                                                <li>
+                                                                {{-- <li>
                                                                     <a href="../../{{ $tag->img }}" class="geodir-lightbox-image" target="_blank"><img src="../../{{ $tag->img }}" width="1440" height="960"><i class="fas fa-search-plus" aria-hidden="true"></i></a>
+                                                                </li> --}}
+                                                                @foreach($tag->img as $im)
+                                                                <li>
+                                                                    <a href="{{ $im->getUrl() }}" class="geodir-lightbox-image" target="_blank">
+                                                                        <img src="{{ $im->getUrl('thumb') }}" width="1440" height="960">
+                                                                        <i class="fas fa-search-plus" aria-hidden="true"></i>
+                                                                    </a>
                                                                 </li>
+                                                            @endforeach
                                                         </ul>
                                                     </div>
                                                 </div>
