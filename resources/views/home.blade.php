@@ -65,7 +65,7 @@
                                                     <a href="{{ route('tag', '') }}/`+place.id+`" title="View: `+place.name+`">`+place.name+`</a>
                                                 </h4>
                                             </div>
-                                            <a href="{{ route('tag', '') }}/`+place.id+`"><img src="`+place.img+`" alt="`+place.name+`" class="align size-medium_large" width="1400" height="930"></a>
+                                            <a href="{{ route('tag', '') }}/`+place.id+`"><img src="`+place.thumbnail+`" alt="`+place.name+`" class="align size-medium_large" width="1400" height="930"></a>
                                         </li>
                                     </ul>
                                 </div>

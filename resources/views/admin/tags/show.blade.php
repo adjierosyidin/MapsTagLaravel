@@ -44,9 +44,14 @@
                             {{ trans('cruds.tag.fields.img') }}
                         </th>
                         <td>
-                            <a href="../../../{{ $tag->img }}" target="_blank">
+                            {{-- <a href="../../../{{ $tag->img }}" target="_blank">
                                 <img src="../../../{{ $tag->img }}" width="50px" height="50px">
-                            </a>
+                            </a> --}}
+                            @foreach($tag->img as $key => $media)
+                                <a href="{{ $media->getUrl() }}" target="_blank">
+                                    <img src="{{ $media->getUrl('thumb') }}" width="50px" height="50px">
+                                </a>
+                            @endforeach
                         </td>
                     </tr>
                     <tr>

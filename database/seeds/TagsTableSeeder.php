@@ -14,6 +14,7 @@ class TagsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
+        /* $pictures = collect(range(1,3)); */
         $users = Role::findOrFail(2)->users;
 
         $maptags = [
@@ -54,6 +55,11 @@ class TagsTableSeeder extends Seeder
                 'active' => 1,
             ];
             $tag = $user->tags()->create(array_merge($tag, $maptags[$currentAddress++]));
+        
+            /* foreach($pictures->random(rand(1,3)) as $index)
+            {
+                $tag->addMediaFromUrl(public_path("assets/images/tags/a$index.jpg"))->toMediaCollection('img');
+            } */
         }
 
     }

@@ -38,12 +38,9 @@ class TagsController extends Controller
     {
         $tag = Tag::create($request->all());
 
-        // foreach ($request->input('photos', []) as $file) {
-        //     $tag->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('photos');
-        // }
-        $request->validate([
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        foreach ($request->input('img', []) as $file) {
+            $tag->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('img');
+        }
 
 
         $imageName = time().'.'.$request->image->extension();  
@@ -73,19 +70,19 @@ class TagsController extends Controller
         }
         $tag->update($request->all());
 
-        /* if (count($tag->photos) > 0) {
-            foreach ($tag->photos as $media) {
-                if (!in_array($media->file_name, $request->input('photos', []))) {
+        if (count($tag->img) > 0) {
+            foreach ($tag->img as $media) {
+                if (!in_array($media->file_name, $request->input('img', []))) {
                     $media->delete();
                 }
             }
-        } */
+        }
 
-        /* $media = $tag->photos->pluck('file_name')->toArray(); */
+        $media = $tag->img->pluck('file_name')->toArray(); 
 
-        foreach ($request->input('photos', []) as $file) {
+        foreach ($request->input('img', []) as $file) {
             if (count($media) === 0 || !in_array($file, $media)) {
-                $tag->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('photos');
+                $tag->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('img');
             }
         }
 
@@ -110,6 +107,41 @@ class TagsController extends Controller
 
         return back();
     }
+
+    /* public function update(UpdateTagRequest $request, Tag $tag)
+    {
+        if($request['img']!="undefined"){
+            
+            $image       = $request['img'];
+            $upload_path = 'assets/images/tags';
+            $file_name   = time()."_".$image->getClientOriginalName();
+            $image->move($upload_path, $file_name);
+
+            return parent::update($id,[
+                'id'            => e($request['id']),
+                'nama'          => e($request['nama']),
+                'address'       => e($request['address']),
+                'latitude'      => e($request['latitude']),
+                'longitude'     => e($request['longitude']),
+                'description'   => e($request['description']),
+                'img'           => e($upload_path.$file_name),
+                'active'        => e($request['active'])
+            ]);
+        }else{
+            return parent::update($id, [
+                'id'            => e($request['id']),
+                'nama'          => e($request['nama']),
+                'address'       => e($request['address']),
+                'latitude'      => e($request['latitude']),
+                'longitude'     => e($request['longitude']),
+                'description'   => e($request['description']),
+                'active'        => e($request['active'])
+            ]);
+        }
+        
+        return redirect()->route('admin.tags.index');
+    } */
+
     public function massDestroy(MassDestroyTagRequest $request)
     {
         Tag::whereIn('id', request('ids'))->delete();

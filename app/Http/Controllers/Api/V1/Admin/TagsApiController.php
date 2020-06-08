@@ -27,8 +27,8 @@ class TagsApiController extends Controller
     {
         $tag = Tag::create($request->all());
 
-        if ($request->input('photos', false)) {
-            $tag->addMedia(storage_path('tmp/uploads/' . $request->input('photos')))->toMediaCollection('photos');
+        if ($request->input('img', false)) {
+            $tag->addMedia(storage_path('tmp/uploads/' . $request->input('img')))->toMediaCollection('img');
         }
 
         return (new TagResource($tag))
