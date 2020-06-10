@@ -47,12 +47,12 @@ class TagsApiController extends Controller
     {
         $tag->update($request->all());
 
-        if ($request->input('photos', false)) {
-            if (!$tag->photos || $request->input('photos') !== $tag->photos->file_name) {
-                $tag->addMedia(storage_path('tmp/uploads/' . $request->input('photos')))->toMediaCollection('photos');
+        if ($request->input('img', false)) {
+            if (!$tag->img || $request->input('img') !== $tag->img->file_name) {
+                $tag->addMedia(storage_path('tmp/uploads/' . $request->input('img')))->toMediaCollection('img');
             }
-        } elseif ($tag->photos) {
-            $tag->photos->delete();
+        } elseif ($tag->img) {
+            $tag->img->delete();
         }
 
         return (new TagResource($tag))

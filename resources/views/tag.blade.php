@@ -10,7 +10,7 @@
                     <header>
                         <h1 class="entry-title">{{ $tag->name }}</h1></header>
                     <div class="entry-content entry-summary">
-                        @if($tag->img)
+                        @if($tag->img->count())
                             <div class="geodir-post-slider center-gallery">
                                 <div class="bxslider">
                                     {{-- <div><img src="../{{ $tag->img }}"></div> --}}

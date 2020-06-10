@@ -7,6 +7,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -68,5 +70,30 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function apiregister(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user) ?: redirect($this->redirectPath());
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $data['user'] = $user->toArray();
+        $token = $user->createToken('user')->accessToken;
+        $data['token'] = $token;
+
+        return response()->json(
+            [
+                'success' => true,
+                'data' => $data,
+                'message' => 'Register Berhasil'
+            ], 201);
     }
 }
