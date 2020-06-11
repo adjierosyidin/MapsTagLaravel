@@ -42,7 +42,10 @@ class TagsController extends Controller
             $tag->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('img');
         }
 
+
+
         return redirect()->route('admin.tags.index');
+ 
     }
 
     public function edit(Tag $tag)
