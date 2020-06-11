@@ -74,8 +74,16 @@ class RegisterController extends Controller
 
     public function apiregister(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json(['success' => false,'error'=>$validator->errors(), 'message' => 'Register Gagal'], 401);            
+        }
+        
         event(new Registered($user = $this->create($request->all())));
 
         $this->guard()->login($user);
