@@ -43,12 +43,9 @@ class TagsController extends Controller
         }
 
 
-        $imageName = time().'.'.$request->image->extension();  
-   
-        $request->image->move(public_path('assets/images/tags'), $imageName);
 
-        // return redirect()->route('admin.tags.index');
-        dump($tag);
+        return redirect()->route('admin.tags.index');
+ 
     }
 
     public function edit(Tag $tag)

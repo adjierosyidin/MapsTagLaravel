@@ -31,8 +31,8 @@
                 </div>
                 <div class="form-group">
                     <label for="img">{{ trans('cruds.tag.fields.img') }}</label>
-                    <input type="file" name="img" id="img-dropzone" class="needsclick dorpzone form-control {{ $errors->has('img') ? 'is-invalid' : '' }}">
-                    <!-- <div class="needsclick dropzone {{ $errors->has('img') ? 'is-invalid' : '' }}" id="img-dropzone"> -->
+                    <!-- <input type="file" name="img" id="img-dropzone" class="needsclick dorpzone form-control {{ $errors->has('img') ? 'is-invalid' : '' }}"> -->
+                    <div class="needsclick dropzone {{ $errors->has('img') ? 'is-invalid' : '' }}" id="img-dropzone">
                     </div>
                     @if($errors->has('img'))
                         <div class="invalid-feedback">
@@ -41,22 +41,31 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.tag.fields.img_helper') }}</span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" >
                     <label for="address">{{ trans('cruds.tag.fields.address') }}</label>
                     <input class="form-control map-input {{ $errors->has('address') ? 'is-invalid' : '' }}" type="text" name="address" id="address" value="{{ old('address') }}">
-                    <input type="hidden" name="latitude" id="address-latitude" value="{{ old('latitude') ?? '0' }}" />
-                    <input type="hidden" name="longitude" id="address-longitude" value="{{ old('longitude') ?? '0' }}" />
+                    <div id="manual" style="display:none">
+                    <label for="latitude">Latitude</label>
+                    <input class="form-control" type="text" name="latitude" id="address-latitude" value="{{ old('latitude') ?? '0' }}" />
+                    <label for="longitude">Latitude</label>
+                    <input class="form-control" type="text" name="longitude" id="address-longitude" value="{{ old('longitude') ?? '0' }}" />
+                    </div>
                     @if($errors->has('address'))
                         <div class="invalid-feedback">
                             {{ $errors->first('address') }}
                         </div>
                     @endif
                     <span class="help-block">{{ trans('cruds.tag.fields.address_helper') }}</span>
+                    <div id="address-map-container" class="mb-2 mt-3" style="width:100%;height:400px; ">
+                        <div style="width: 100%; height: 100%" id="address-map"></div>
+                    </div>
+                    <label for="manual">Tidak Menemukan Lokasi?</label>         
+                    <button type="button" class="btn btn-link" onclick="myFunction()">Tambahkan Secara Manual</button>   
+                        
+                
                 </div>
-                <div id="address-map-container" class="mb-2" style="width:100%;height:400px; ">
-                    <div style="width: 100%; height: 100%" id="address-map"></div>
-                </div>
-                <div class="form-group">
+                
+                <div class="form-group pt-3">
                     <div class="form-check {{ $errors->has('active') ? 'is-invalid' : '' }}">
                         <input class="form-check-input" type="checkbox" name="active" id="active" value="1" {{ old('active', 0) == 1 ? 'checked' : '' }}>
                         <label class="form-check-label" for="active">{{ trans('cruds.tag.fields.active') }}</label>
@@ -85,6 +94,11 @@
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize&language=en&region=GB" async defer></script>
     <script src="/js/mapInput.js"></script>
     <script>
+        function myFunction(){
+            $('#manual').show(); 
+        }
+
+
         var uploadedPhotosMap = {}
     Dropzone.options.imgDropzone = {
         url: '{{ route('admin.tags.storeMedia') }}',

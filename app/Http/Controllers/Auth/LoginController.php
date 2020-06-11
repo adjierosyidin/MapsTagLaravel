@@ -63,7 +63,7 @@ class LoginController extends Controller
                 return response()->json(
                     [
                         'success' => false,
-                        'data' => '',
+                        'data' => 'q',
                         'message' => 'Login Gagal'
                     ]
                 );
