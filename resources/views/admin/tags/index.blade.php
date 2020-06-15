@@ -12,6 +12,7 @@
     <div class="card">
         <div class="card-header">
             {{ trans('cruds.tag.title_singular') }} {{ trans('global.list') }}
+
         </div>
 
         <div class="card-body">
@@ -102,7 +103,7 @@
 
 
         </div>
-    </div>
+    </>
     @endsection
     @section('scripts')
     @parent
