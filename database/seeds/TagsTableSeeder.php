@@ -23,7 +23,7 @@ class TagsTableSeeder extends Seeder
                 'address' => 'Perum Griyashanta Blk. B No.116 Mojolangu',
                 'latitude' => '-7.939794',
                 'longitude' => '112.621231',
-                'description' => 'Restoran',
+                'description' => 'Toko',
                 'created_at' => Carbon::now()
             ],
             [
@@ -31,14 +31,14 @@ class TagsTableSeeder extends Seeder
                 'address' => 'Jalan Soekarno Hatta No. A-394, Lowokwaru',
                 'latitude' => '-7.939397',
                 'longitude' => '112.619537',
-                'description' => 'Bar',
+                'description' => 'Sekolah',
                 'created_at' => Carbon::now()],
             [
                 'name' => 'Taman Krida Budaya',
                 'address' => 'Jl. Soekarno Hatta No.7 Jatimulyo',
                 'latitude' => '-7.942616',
                 'longitude' => '112.622520',
-                'description' => 'Bar',
+                'description' => 'Taman',
                 'created_at' => Carbon::now()
             ],
             
