@@ -4,6 +4,7 @@ namespace App;
 
 use App\Notifications\VerifyUserNotification;
 use Carbon\Carbon;
+use App\OauthAccessToken;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -92,5 +93,9 @@ class User extends Authenticatable
         $this->save();
 
         return $this->api_token;
+    }
+
+    public function AauthAccessToken(){
+        return $this->hasMany(OauthAccessToken::class);
     }
 }

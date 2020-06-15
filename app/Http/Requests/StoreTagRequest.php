@@ -11,7 +11,7 @@ class StoreTagRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('tag_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        /* abort_if(Gate::denies('tag_create'), Response::HTTP_FORBIDDEN, '403 Forbidden'); */
 
         return true;
     }
@@ -19,7 +19,19 @@ class StoreTagRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'         => [
+            'name' => [
+                'required',
+            ],
+            'address' => [
+                'required',
+            ],
+            'latitude' => [
+                'required',
+            ],
+            'longitude' => [
+                'required',
+            ],
+            'description' => [
                 'required',
             ],
         ];

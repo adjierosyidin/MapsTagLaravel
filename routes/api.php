@@ -1,20 +1,32 @@
 <?php
 
-Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:api']], function () {
-    // Permissions
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin'], function () {
+    
+    Route::group([
+        'middleware' => ['auth:api']
+    ], function() {
+        Route::apiResource('permissions', 'PermissionsApiController');
+        Route::apiResource('roles', 'RolesApiController');
+        Route::apiResource('users', 'UsersApiController');
+        Route::post('tags/media', 'TagsApiController@storeMedia')->name('tags.storeMedia');
+        Route::apiResource('tags', 'TagsApiController');
+        // ... Other secured API endpoints
+    });
+    
+    /* // Permissions
     Route::apiResource('permissions', 'PermissionsApiController');
 
     // Roles
-    Route::apiResource('roles', 'RolesApiController');
+    Route::apiResource('roles', 'RolesApiController'); */
 
-    // Users
-    Route::apiResource('users', 'UsersApiController');
+    /* // Users
+    Route::apiResource('users', 'UsersApiController'); */
 
-    // Tags
+    /* // Tags
     Route::post('tags/media', 'TagsApiController@storeMedia')->name('tags.storeMedia');
-    Route::apiResource('tags', 'TagsApiController');
+    Route::apiResource('tags', 'TagsApiController'); */
 });
 
 Route::post('register', 'Auth\RegisterController@apiregister');
 Route::post('login', 'Auth\LoginController@apilogin');
-Route::post('logout', 'Auth\LoginController@apilogout');
+Route::get('logout', 'Auth\LoginController@apilogout');

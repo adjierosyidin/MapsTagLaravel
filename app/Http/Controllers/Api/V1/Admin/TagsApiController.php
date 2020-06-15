@@ -18,7 +18,7 @@ class TagsApiController extends Controller
 
     public function index()
     {
-        abort_if(Gate::denies('tag_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        /* abort_if(Gate::denies('tag_access'), Response::HTTP_FORBIDDEN, '403 Forbidden'); */
 
         return new TagResource(Tag::with(['created_by'])->get());
     }
@@ -27,8 +27,19 @@ class TagsApiController extends Controller
     {
         $tag = Tag::create($request->all());
 
-        if ($request->input('img', false)) {
-            $tag->addMedia(storage_path('tmp/uploads/' . $request->input('img')))->toMediaCollection('img');
+        /* if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $name = uniqid() . '_' . trim($file->getClientOriginalName());
+            $fileAdders = $tag->addMultipleMediaFromRequest(['img'])
+            ->each(function ($fileAdder) {
+                $fileAdder->toMediaCollection('img');
+            });
+        } */
+
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $name = uniqid() . '_' . trim($file->getClientOriginalName());
+            $tag->addMediaFromRequest('img')->usingFileName($name)->toMediaCollection('img');
         }
 
         return (new TagResource($tag))
@@ -38,7 +49,7 @@ class TagsApiController extends Controller
 
     public function show(Tag $tag)
     {
-        abort_if(Gate::denies('tag_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        /* abort_if(Gate::denies('tag_show'), Response::HTTP_FORBIDDEN, '403 Forbidden'); */
 
         return new TagResource($tag->load(['created_by']));
     }
@@ -62,7 +73,7 @@ class TagsApiController extends Controller
 
     public function destroy(Tag $tag)
     {
-        abort_if(Gate::denies('tag_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        /* abort_if(Gate::denies('tag_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden'); */
 
         $tag->delete();
 
