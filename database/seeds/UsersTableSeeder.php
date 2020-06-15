@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
 
         User::insert($users);
 
-        foreach(range(1,2) as $id)
+        foreach(range(1,3) as $id)
         {
             User::create([
                 'name' => $faker->unique()->name,

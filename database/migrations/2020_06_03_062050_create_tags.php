@@ -20,7 +20,6 @@ class CreateTags extends Migration
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->longText('description')->nullable();
-            $table->string('img')->nullable();
             $table->boolean('active')->default(0);
             $table->timestamps();
             $table->softDeletes();

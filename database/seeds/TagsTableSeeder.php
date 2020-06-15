@@ -24,7 +24,6 @@ class TagsTableSeeder extends Seeder
                 'latitude' => '-7.939794',
                 'longitude' => '112.621231',
                 'description' => 'Restoran',
-                'img' => 'assets/images/tags/milagros.png',
                 'created_at' => Carbon::now()
             ],
             [
@@ -33,7 +32,6 @@ class TagsTableSeeder extends Seeder
                 'latitude' => '-7.939397',
                 'longitude' => '112.619537',
                 'description' => 'Bar',
-                'img' => 'assets/images/tags/smpn8mlg.png',
                 'created_at' => Carbon::now()],
             [
                 'name' => 'Taman Krida Budaya',
@@ -41,13 +39,13 @@ class TagsTableSeeder extends Seeder
                 'latitude' => '-7.942616',
                 'longitude' => '112.622520',
                 'description' => 'Bar',
-                'img' => 'assets/images/tags/tamankrida.png',
                 'created_at' => Carbon::now()
             ],
             
         ];
 
         $currentAddress = 0;
+        $index = 1;
 
         foreach($users as $user)
         {
@@ -55,11 +53,10 @@ class TagsTableSeeder extends Seeder
                 'active' => 1,
             ];
             $tag = $user->tags()->create(array_merge($tag, $maptags[$currentAddress++]));
-        
-            /* foreach($pictures->random(rand(1,3)) as $index)
-            {
-                $tag->addMediaFromUrl(public_path("assets/images/tags/a$index.jpg"))->toMediaCollection('img');
-            } */
+            
+    
+            $tag->copyMedia(public_path("assets/images/tags/a$index.png"))->toMediaCollection('img');
+            $index++;
         }
 
     }
