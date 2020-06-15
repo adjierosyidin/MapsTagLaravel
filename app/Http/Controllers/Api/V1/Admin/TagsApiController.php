@@ -27,8 +27,19 @@ class TagsApiController extends Controller
     {
         $tag = Tag::create($request->all());
 
-        if ($request->input('img', false)) {
-            $tag->addMedia(storage_path('tmp/uploads/' . $request->input('img')))->toMediaCollection('img');
+        /* if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $name = uniqid() . '_' . trim($file->getClientOriginalName());
+            $fileAdders = $tag->addMultipleMediaFromRequest(['img'])
+            ->each(function ($fileAdder) {
+                $fileAdder->toMediaCollection('img');
+            });
+        } */
+
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $name = uniqid() . '_' . trim($file->getClientOriginalName());
+            $tag->addMediaFromRequest('img')->usingFileName($name)->toMediaCollection('img');
         }
 
         return (new TagResource($tag))

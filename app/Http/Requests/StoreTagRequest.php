@@ -19,7 +19,19 @@ class StoreTagRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'         => [
+            'name' => [
+                'required',
+            ],
+            'address' => [
+                'required',
+            ],
+            'latitude' => [
+                'required',
+            ],
+            'longitude' => [
+                'required',
+            ],
+            'description' => [
                 'required',
             ],
         ];
