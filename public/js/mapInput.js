@@ -1,39 +1,75 @@
 function initialize() {
 
-    $('form').on('keyup keypress', function(e) {
+    $('form').on('keyup keypress', function (e) {
         var keyCode = e.keyCode || e.which;
         if (keyCode === 13) {
             e.preventDefault();
             return false;
         }
     });
+
     const locationInputs = document.getElementsByClassName("map-input");
 
+
     const autocompletes = [];
+
     const geocoder = new google.maps.Geocoder;
+
     for (let i = 0; i < locationInputs.length; i++) {
 
         const input = locationInputs[i];
         const fieldKey = input.id.replace("-input", "");
         const isEdit = document.getElementById(fieldKey + "-latitude").value != '' && document.getElementById(fieldKey + "-longitude").value != '';
 
-        const latitude = parseFloat(document.getElementById(fieldKey + "-latitude").value) || 51.5073509;
-        const longitude = parseFloat(document.getElementById(fieldKey + "-longitude").value) || -0.12775829999998223;
+        const latitude = parseFloat(document.getElementById(fieldKey + "-latitude").value) || -7.9666204;
+        const longitude = parseFloat(document.getElementById(fieldKey + "-longitude").value) || 112.6326321;
 
         const map = new google.maps.Map(document.getElementById(fieldKey + '-map'), {
-            center: {lat: latitude, lng: longitude},
-            zoom: 13
+            center: {
+                lat: latitude,
+                lng: longitude
+            },
+            zoom: 15
         });
         const marker = new google.maps.Marker({
             map: map,
-            position: {lat: latitude, lng: longitude},
+            position: {
+                lat: latitude,
+                lng: longitude
+            },
         });
 
         marker.setVisible(isEdit);
 
         const autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.key = fieldKey;
-        autocompletes.push({input: input, map: map, marker: marker, autocomplete: autocomplete});
+        autocompletes.push({
+            input: input,
+            map: map,
+            marker: marker,
+            autocomplete: autocomplete
+        });
+
+        var infoWindow = new google.maps.InfoWindow();
+
+
+        map.addListener('click', function (event) {
+            // Close the current InfoWindow.
+            infoWindow.close();
+            infoWindow = new google.maps.InfoWindow({
+                position: event.latLng
+            });
+            infoWindow.setContent(event.latLng.toString());
+            infoWindow.open(map);
+
+        });
+
+
+
+
+
+
+
     }
 
     for (let i = 0; i < autocompletes.length; i++) {
@@ -46,7 +82,9 @@ function initialize() {
             marker.setVisible(false);
             const place = autocomplete.getPlace();
 
-            geocoder.geocode({'placeId': place.place_id}, function (results, status) {
+            geocoder.geocode({
+                'placeId': place.place_id
+            }, function (results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
                     const lat = results[0].geometry.location.lat();
                     const lng = results[0].geometry.location.lng();
@@ -71,11 +109,11 @@ function initialize() {
 
         });
     }
-}
 
-function setLocationCoordinates(key, lat, lng) {
-    const latitudeField = document.getElementById(key + "-" + "latitude");
-    const longitudeField = document.getElementById(key + "-" + "longitude");
-    latitudeField.value = lat;
-    longitudeField.value = lng;
+    function setLocationCoordinates(key, lat, lng) {
+        const latitudeField = document.getElementById(key + "-" + "latitude");
+        const longitudeField = document.getElementById(key + "-" + "longitude");
+        latitudeField.value = lat;
+        longitudeField.value = lng;
+    }
 }
