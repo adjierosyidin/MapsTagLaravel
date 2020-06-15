@@ -44,12 +44,14 @@
                 <div class="form-group">
                     <label for="address">{{ trans('cruds.tag.fields.address') }}</label>
                     <input class="form-control map-input {{ $errors->has('address') ? 'is-invalid' : '' }}" type="text" name="address" id="address" value="{{ old('address', $tag->address) }}">
-                    <div id="manual" style="display:none">
+                    <div id="manual" style="display:none" class="mt-1">
+                    <span style="color:red;font-size:12px"><i>*Jika tidak mengetahui koordinat, click lokasi yang diinginkan di map, lalu masukkan pada kolom secara berurutan latitude dan longitude nya</i></span><br>
                     <label for="latitude">Latitude</label>
-                    <input class="form-control" type="text" name="latitude" id="address-latitude" value="{{ old('latitude') ?? '0' }}" />
-                    <label for="longitude">Latitude</label>
-                    <input class="form-control" type="text" name="longitude" id="address-longitude" value="{{ old('longitude') ?? '0' }}" />
-                    </div>@if($errors->has('address'))
+                    <input class="form-control" type="text" name="latitude" id="address-latitude" value="{{ old('latitude', $tag->latitude) ?? '0' }}" />
+                    <label for="longitude">Longitude</label>
+                    <input class="form-control" type="text" name="longitude" id="address-longitude" value="{{ old('longitude', $tag->longitude) ?? '0' }}" />
+                    </div>
+                    @if($errors->has('address'))
                         <div class="invalid-feedback">
                             {{ $errors->first('address') }}
                         </div>
