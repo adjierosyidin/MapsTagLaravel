@@ -178,7 +178,7 @@ $(function(){
                                                     <a href="{{ route('tag', $tag->id) }}" title="View: {{ $tag->name }}">{{ $tag->name }}</a>
                                                 </h4>
                                             </div>
-                                            <a href="{{ route('tag', $tag->id) }}"><img src="../{{ $tag->img }}" alt="{{ $tag->name }}" class="align size-medium_large" width="1400" height="930"></a>
+                                            <a href="{{ route('tag', $tag->id) }}"><img src="{{ $tag->thumbnail }}" alt="{{ $tag->name }}" class="align size-medium_large" width="1400" height="930"></a>
                                         </li>
                                     </ul>
                                 </div>
