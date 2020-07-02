@@ -90,10 +90,10 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return $this->registered($request, $user) ?: redirect($this->redirectPath());
+        return $this->daftar($request, $user) ?: redirect($this->redirectPath());
     }
 
-    protected function registered(Request $request, $user)
+    protected function daftar(Request $request, $user)
     {
         $data['user'] = $user->toArray();
         $token = $user->createToken('user')->accessToken;
