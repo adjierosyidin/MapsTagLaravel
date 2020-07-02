@@ -9,6 +9,7 @@ use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 use Illuminate\Http\Request;
 use App\Tag;
+use App\User;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,9 +30,9 @@ class TagsController extends Controller
     public function create()
     {
         abort_if(Gate::denies('tag_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $users = User::where('id', '=', auth()->id())->get();
 
-
-        return view('admin.tags.create');
+        return view('admin.tags.create', compact('users'));
     }
 
     public function store(StoreTagRequest $request)
@@ -42,10 +43,8 @@ class TagsController extends Controller
             $tag->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('img');
         }
 
-
-
         return redirect()->route('admin.tags.index');
- 
+
     }
 
     public function edit(Tag $tag)

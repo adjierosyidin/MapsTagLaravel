@@ -21,13 +21,17 @@
                 overviewMapControl:false,
                 rotateControl:false
             }
+
+            
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-            var image = new google.maps.MarkerImage("assets/images/pin.png", null, null, null, new google.maps.Size(40,52));
+            
             var places = @json($tags);
 
             for(place in places)
-            {
+            {   
                 place = places[place];
+                var pinColor = place.tag_color;
+                var image = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor, null, null, null, new google.maps.Size(34,49));
                 if(place.latitude && place.longitude)
                 {
                     var marker = new google.maps.Marker({

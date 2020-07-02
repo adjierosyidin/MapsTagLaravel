@@ -57,6 +57,15 @@
                             @endforeach
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            Color Marker
+                        </th>
+                        <td>
+                            <input type="color" name="tag_color" class="form-control" required placeholder="{{ trans('global.tag_color') }}" value="{{ old('tag_color', $user->tag_color) }}" disabled>
+            
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

@@ -21,6 +21,7 @@ class CreateTags extends Migration
             $table->string('longitude')->nullable();
             $table->longText('description')->nullable();
             $table->boolean('active')->default(0);
+            $table->string('tag_color');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -1,6 +1,7 @@
 <?php
 
 use App\Role;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -51,10 +52,10 @@ class TagsTableSeeder extends Seeder
         {
             $tag = [
                 'active' => 1,
+                'tag_color' => "ff0000"
             ];
             $tag = $user->tags()->create(array_merge($tag, $maptags[$currentAddress++]));
             
-    
             $tag->copyMedia(public_path("assets/images/tags/a$index.png"))->toMediaCollection('img');
             $index++;
         }

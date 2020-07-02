@@ -78,6 +78,10 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.tag.fields.active_helper') }}</span>
                 </div>
+                
+                @foreach ($users as $user)
+                <input type="hidden" name="tag_color" id="tag_color" value="{{ $user->tag_color }}">
+                @endforeach
 
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">
