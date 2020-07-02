@@ -64,12 +64,6 @@ function initialize() {
 
         });
 
-
-
-
-
-
-
     }
 
     for (let i = 0; i < autocompletes.length; i++) {

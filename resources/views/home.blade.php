@@ -32,7 +32,7 @@
                 {
                     var marker = new google.maps.Marker({
                         position: new google.maps.LatLng(place.latitude, place.longitude),
-                        icon:image,
+                        icon:'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|{{}}',
                         map: map,
                         title: place.name
                     });
@@ -48,8 +48,7 @@
         }
         google.maps.event.addDomListener(window, 'load', initialize);
 
-        function generateContent(place)
-    {
+        function generateContent(place){
         var content = `
             <div class="gd-bubble" style="">
                 <div class="gd-bubble-inside">
