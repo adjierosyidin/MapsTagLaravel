@@ -63,6 +63,17 @@
                         <input type="password" name="password_confirmation" class="form-control" required placeholder="{{ trans('global.login_password_confirmation') }}">
                     </div>
 
+                    <p class="text-muted">Pick Color For Your Marker</p>
+
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-map-marker-alt fa-fw"></i>
+                            </span>
+                        </div>
+                        <input type="color" name="tag_color" class="form-control" required placeholder="{{ trans('global.tag_color') }}" value="{{ old('tag_color', '#ff0000') }}">
+                    </div>
+
                     <button class="btn btn-block btn-primary">
                         {{ trans('global.register') }}
                     </button>
@@ -78,5 +89,10 @@
 
     </div>
 </div>
+
+@endsection
+
+@section('scripts')
+
 
 @endsection

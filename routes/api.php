@@ -27,6 +27,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin'], 
     Route::apiResource('tags', 'TagsApiController'); */
 });
 
-Route::post('register', 'Auth\RegisterController@apiregister');
+Route::post('daftar', 'Auth\RegisterController@apiregister');
 Route::post('login', 'Auth\LoginController@apilogin');
 Route::get('logout', 'Auth\LoginController@apilogout');
