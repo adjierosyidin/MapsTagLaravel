@@ -66,11 +66,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $str = substr($data['tag_color'], 1);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'tag_color' => $data['tag_color'],
+            'tag_color' => $str,
         ]);
     }
 
@@ -80,6 +81,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
+            'tag_color' => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {

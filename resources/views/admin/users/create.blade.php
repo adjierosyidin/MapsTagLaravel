@@ -57,6 +57,16 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
             </div>
+
+            <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fas fa-map-marker-alt fa-fw"></i>
+                    </span>
+                </div>
+                <input type="color" name="tag_color" class="form-control" required placeholder="{{ trans('global.tag_color') }}" value="{{ old('tag_color', '#ff0000') }}">
+            </div>
+            
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}

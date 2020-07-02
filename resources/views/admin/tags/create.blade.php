@@ -78,6 +78,10 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.tag.fields.active_helper') }}</span>
                 </div>
+                
+                @foreach ($users as $user)
+                <input type="hidden" name="tag_color" id="tag_color" value="{{ $user->tag_color }}">
+                @endforeach
 
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">
@@ -93,7 +97,7 @@
 
     @section('scripts')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize&language=en&region=GB" async defer></script>
-    <script src="/js/mapInput.js"></script>
+    <script src="{{asset('js/mapInput.js')}}"></script>
     <script>
         function myFunction(){
             $('#manual').show(); 

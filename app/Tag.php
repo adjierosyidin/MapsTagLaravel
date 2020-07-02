@@ -15,7 +15,7 @@ class Tag extends Model implements HasMedia
 
     public $table = 'tags';
 
-    protected $fillable = ['name','address','latitude','longitude','description','active','created_by_id',];
+    protected $fillable = ['name','address','latitude','longitude','description','active', 'tag_color','created_by_id',];
 
     protected $dates = [
         'created_at',
@@ -42,6 +42,11 @@ class Tag extends Model implements HasMedia
     public function created_by()
     {
         return $this->belongsTo(User::class, 'created_by_id');
+    }
+
+    public function color()
+    {
+        return $this->belongsTo(User::class, 'tag_color');
     }
 
     public function getImgAttribute()
