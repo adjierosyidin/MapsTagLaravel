@@ -36,7 +36,7 @@
                 {
                     var marker = new google.maps.Marker({
                         position: new google.maps.LatLng(place.latitude, place.longitude),
-                        icon:'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|{{}}',
+                        icon:image,
                         map: map,
                         title: place.name
                     });
