@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
+
 
 use App\Tag;
 use Illuminate\Http\Request;
@@ -24,7 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
+        $tg = Tag::searchResults();
+        $tags = $tg->get();
+       
+        
+
+
         return view('home', compact('tags'));
     }
     public function show(Tag $tag)
