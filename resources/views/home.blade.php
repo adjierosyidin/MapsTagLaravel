@@ -1,5 +1,76 @@
     @extends('layouts.main')
 
+    @section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-box content-single">
+                    <article class="post-8 page type-page status-publish hentry">
+                        <header>
+                            <h1 class="entry-title">{{ request()->filled('search') || request()->filled('date') ? 'Search results' : 'All Tags' }}</h1></header>
+                        <div class="entry-content entry-summary">
+                            <div class="geodir-search-container geodir-advance-search-default" data-show-adv="default">
+                                <form class="geodir-listing-search gd-search-bar-style" name="geodir-listing-search" action="{{ route('home') }}" method="get">
+                                    <div class="geodir-loc-bar">
+                                        <div class="clearfix geodir-loc-bar-in">
+                                            <div class="geodir-search">
+                                                <div class='gd-search-input-wrapper gd-search-field-cpt gd-search-field-taxonomy gd-search-field-categories'>
+                                                    <input  type="date" class="date" value="{{ old('date', request()->input('date')) }}" name="date"/>
+                                                </div>
+                                                <div class='gd-search-input-wrapper gd-search-field-search'> <span class="geodir-search-input-label"><i class="fas fa-search gd-show"></i><i class="fas fa-times geodir-search-input-label-clear gd-hide" title="Clear field"></i></span>
+                                                    <input class="search_text gd_search_text" name="search" value="{{ old('search', request()->input('search')) }}" type="text" placeholder="Search for" aria-label="Search for" autocomplete="off" />
+                                                </div>
+                                                <button class="geodir_submit_search" data-title="fas fa-search" aria-label="fas fa-search"><i class="fas fas fa-search" aria-hidden="true"></i><span class="sr-only">Search</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="geodir-loop-container">
+                                <ul class="geodir-category-list-view clearfix gridview_onethird geodir-listing-posts geodir-gridview gridview_onethird">
+                                    @foreach($tags as $tag)
+                                        <li class="gd_place type-gd_place status-publish has-post-thumbnail">
+                                            <div class="gd-list-item-left ">
+                                                <div class="geodir-post-slider">
+                                                    <div class="geodir-image-container geodir-image-sizes-medium_large">
+                                                        <div class="geodir-image-wrapper">
+                                                            <ul class="geodir-post-image geodir-images clearfix">
+                                                                <li>
+                                                                    <a href='{{ route('tag', $tag->id) }}'>
+                                                                        <img src="{{ $tag->thumbnail }}" width="1440" height="960" class="geodir-lazy-load align size-medium_large" />
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="gd-list-item-right ">
+                                                <div class="geodir-post-title">
+                                                    <h2 class="geodir-entry-title"> <a href="{{ route('tag', $tag->id) }}" title="View: {{ $tag->name }}">{{ $tag->name }}</a></h2>
+                                                </div>
+                                                <div class="geodir-post-content-container">
+                                                    <div class="geodir_post_meta  geodir-field-post_content" style='max-height:120px;'>{{ $tag->address }} </div>
+                                                </div>
+                                                <div class="geodir-post-content-container">
+                                                    <div class="geodir_post_meta  geodir-field-post_content" style='max-height:120px;overflow:hidden;'>{{ $tag->description }}</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                <div class="clear"></div>
+                            </div>
+                            
+                        </div>
+                        <footer class="entry-footer"></footer>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endsection
+
     @section('scripts')
     <script type='text/javascript' src='https://maps.google.com/maps/api/js?language=en&key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&region=GB'></script>
     <script defer>

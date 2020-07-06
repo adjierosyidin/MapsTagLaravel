@@ -17,7 +17,7 @@ class Tag extends Model implements HasMedia
 
     protected $fillable = ['name','address','latitude','longitude','description','active', 'tag_color','created_by_id',];
 
-    protected $dates = [
+    public $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
@@ -63,5 +63,24 @@ class Tag extends Model implements HasMedia
     public function getThumbnailAttribute()
     {
         return $this->getFirstMediaUrl('img', 'thumb');
+    }
+
+    public function scopeSearchResults($query)
+    {
+        return $query->where('active', 1)
+            ->when(request()->filled('date'), function($query) {
+                $query->where(function($query) {
+                    $search = request()->input('date');
+                    $query->where('created_at', 'LIKE', "%$search%");
+                });
+            })
+            ->when(request()->filled('search'), function($query) {
+                $query->where(function($query) {
+                    $search = request()->input('search');
+                    $query->where('name', 'LIKE', "%$search%")
+                        ->orWhere('description', 'LIKE', "%$search%")
+                        ->orWhere('address', 'LIKE', "%$search%");
+                });     
+            });
     }
 }
