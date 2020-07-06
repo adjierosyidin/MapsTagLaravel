@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
                 'name'           => 'Admin',
                 'email'          => 'admin@admin.com',
                 'password'       => bcrypt('admin'),
-                'tag_color'      => '#ff0000',
+                'tag_color'      => 'ff0000',
                 'remember_token' => null,
             ],
         ];

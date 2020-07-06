@@ -62,7 +62,7 @@
                             Color Marker
                         </th>
                         <td>
-                            <input type="color" name="tag_color" class="form-control" required placeholder="{{ trans('global.tag_color') }}" value="{{ old('tag_color', $user->tag_color) }}" disabled>
+                            <input type="color" name="tag_color" class="form-control" required placeholder="{{ trans('global.tag_color') }}" value="{{ old('tag_color', '#'.$user->tag_color) }}" disabled>
             
                         </td>
                     </tr>

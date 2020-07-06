@@ -65,7 +65,7 @@
                         <i class="fas fa-map-marker-alt fa-fw"></i>
                     </span>
                 </div>
-                <input type="color" name="tag_color" class="form-control" required placeholder="{{ trans('global.tag_color') }}" value="{{ old('tag_color', $user->tag_color) }}">
+                <input type="color" name="tag_color" class="form-control" required placeholder="{{ trans('global.tag_color') }}" value="{{ old('tag_color', '#'.$user->tag_color) }}">
             </div>
 
             <div class="form-group">
